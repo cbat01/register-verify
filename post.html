@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>post</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <form action="" method="">
+        <table>
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input type="text" name="userName" id="userName">
+                </td>
+                <td>
+                    <input type="button" id="btn" value="点击验证">
+                </td>
+                <td>
+                    <span id="span"></span>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById("btn");
+            btn.onclick = function () {
+                var username = document.getElementById("userName").value;
+                //console.log(username);
+
+
+                //第一步 创建XMLHttpRequest 对象
+
+                var xhr = null;
+
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                } else {
+                    //兼容IE6
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                //第二步，准备发送数据
+
+                xhr.open("post", "post-register.php", true);
+                
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+                var param = "userName=" + username;
+
+                //第三步，执行发送
+
+                xhr.send(param);
+
+                //通过回调函数 获取数据
+                xhr.onreadystatechange = function () {
+
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            var result = xhr.responseText;
+                            console.log(result);
+
+                            document.getElementById("span").innerText = result;
+                        }
+                    }
+
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
