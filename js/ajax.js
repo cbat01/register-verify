@@ -7,7 +7,7 @@ function myAjax(type,url,params,dataType,callback){
         }
     }
 
-    xhr.open("type","url",true);
+    xhr.open(type,url,true);
 
     if(type == "get"){
         xhr.send(null);
