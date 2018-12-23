@@ -56,6 +56,38 @@
                     }
                 }
             }
+
+            tel.onblur = function(){
+                var telValue = tel.value;
+                //console.log(telValue);
+
+                var xhr = new XMLHttpRequest();
+
+                var params = "tel="+telValue;
+    
+                xhr.open("post","./admin/tel.php","true");
+
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+                xhr.send(params);
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4){
+                        if(xhr.status == 200){
+                            var result = xhr.responseText;
+                            //console.log(result);
+
+                            result = JSON.parse(result);  //字符串类型转换为对象类型
+                            //console.log(result);
+                            if(result.status == 0){
+                                document.getElementById("tel_result").innerText = result.msg.tips+"----"+result.msg.from;
+                            }else if(result.status == 1){
+                                document.getElementById("tel_result").innerText = result.msg;
+                            }
+                        }
+                    }
+                }
+            }
         }
     </script>
 </body>
