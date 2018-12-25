@@ -37,12 +37,12 @@ function myAjax(type,url,params,dataType,callback){
     }
 }
 function myAjax2(obj){
-    var defautls = {
+    var defaults = {
         type:"get",
         url:"#",
         data:{},
         dataType:"text",
-        success = function(result){console.log(result)}
+        success :function(result){console.log(result)}
     }
 
     for(var key in obj){
@@ -63,9 +63,9 @@ function myAjax2(obj){
         defaults.url = defaults.url + "?" + params;
     }
 
-    xhr.open(defaults.type,defautls.url,true);
+    xhr.open(defaults.type,defaults.url,true);
 
-    if(defautls.type == "get"){
+    if(defaults.type == "get"){
         xhr.send(null);
     }else if(defaults.type == "post"){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
